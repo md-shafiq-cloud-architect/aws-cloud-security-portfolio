@@ -19,7 +19,28 @@ This project demonstrates an enterprise-grade security architecture for governin
 * **Enterprise GenAI Portal (Amazon Q Business):** Deploys an AWS Managed Application accessible through the centralized **AWS Access Portal**, ensuring per-user subscription tracking and data isolation.
 * **Trusted Identity Propagation (TIP):** Implements **OAuth 2.0 / OIDC** token exchange using a **Trusted Token Issuer**, **Customer Managed Application**, **Bootstrap Role**, and **AWS STS (`AssumeRole` with `ProvidedContexts`)** to invoke the `ChatSync` API securely from a custom AngularJS web frontend.
 
----
+### 🔄 End-to-End Trusted Identity Propagation Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User as Workforce User
+    participant IdP as External IdP (Okta/Entra/Cognito)
+    participant App as Custom Web App (AngularJS)
+    participant IDC as IAM Identity Center (OIDC)
+    participant STS as AWS STS
+    participant QBiz as Amazon Q Business
+
+    User->>IdP: Authenticate (OIDC / SAML 2.0)
+    IdP-->>App: Return Signed JWT (id_token)
+    App->>IDC: CreateTokenWithIAM (JWT + Bootstrap Role)
+    IDC-->>App: Return Bearer Token (sts:identity-context)
+    App->>STS: AssumeRole (with ProvidedContexts)
+    STS-->>App: Identity-Enhanced IAM Credentials
+    App->>QBiz: Call ChatSync API (User-Scoped Context)
+    QBiz-->>User: Return Authorized GenAI Response
+```
+
 
 ## 🛡️ Key Security Controls & Architectural Trade-Offs
 
