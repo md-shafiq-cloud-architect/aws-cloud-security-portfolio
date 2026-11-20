@@ -22,5 +22,10 @@
 * **Architecture:** Centralized workforce identity governance using **AWS IAM Identity Center**, **SAML 2.0**, and **SCIM v2.0** across **Okta**, **Microsoft Entra ID**, and **Google Workspace**.
 * **GenAI Access Control:** Configured console-less IDE access for **Amazon Q Developer** (90-day session lifecycle) and centralized portal access for **Amazon Q Business**.
 * **Trusted Identity Propagation (TIP):** Implemented OAuth 2.0 / OIDC token exchange (`CreateTokenWithIAM` + `AssumeRole` with `ProvidedContexts`) and a 60-second pre-expiry auto-refresh timer for secure custom frontend `ChatSync` API calls.
-*  
+  
+*### 4. [Foundational Security, Identity, and Governance](./04-foundational-security-governance)
+* **Threat Detection & CSPM:** Configured **Amazon GuardDuty** (`severity >= 4.01` EventBridge routing) and **AWS Security Hub** (`Exposure Findings`, `Attack Path` analysis, and `Custom Actions` with `Input Transformer`).
+* **Automated Remediation:** Deployed **AWS Config + Systems Manager (SSM)** runbooks to auto-revoke public SSH (`0.0.0.0/0:22`) and **AWS Lambda (`boto3`)** to network-isolate compromised EC2 instances (`isolation-security-group`).
+* **Shift-Left DevSecOps & L7 Edge Defense:** Enforced SBOM vulnerability gates (`urllib3==2.7.0`) and static AST code scanning (`CWE-78`, `CWE-328`) via **Amazon Inspector + CodeBuild**, alongside **AWS WAF** Managed Rules and URL-decode anti-evasion protection.
+  
   
