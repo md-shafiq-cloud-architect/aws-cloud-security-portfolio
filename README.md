@@ -29,3 +29,8 @@
 * **Shift-Left DevSecOps & L7 Edge Defense:** Enforced SBOM vulnerability gates (`urllib3==2.7.0`) and static AST code scanning (`CWE-78`, `CWE-328`) via **Amazon Inspector + CodeBuild**, alongside **AWS WAF** Managed Rules and URL-decode anti-evasion protection.
   
   
+### 5. [AWS Security Reference Architecture (SRA) Compliance Engine](./05-aws-security-reference-architecture)
+* **Architecture & Governance:** Built an automated RFC 2119 compliance engine evaluating multi-account AWS telemetry against enterprise SRA guardrails, including centralized root management and delegated administrator roles.
+* **Identity & Perimeter Controls:** Enforced zero manual IAM users, mandatory IAM Identity Center (IDC) MFA, Transit Gateway connectivity, Multi-AZ firewall endpoints, and DNS Firewall exfiltration blocks.
+* **Validation & Testing:** Implemented a production verification baseline (`sra_compliance_engine.py`), automated unit tests (`test_sra_compliance.py`), and an interactive Google Colab audit lab.
+* 
